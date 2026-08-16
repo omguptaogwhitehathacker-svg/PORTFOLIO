@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "HHO Exhibition Rocket",
+    "description": "An exhibition model rocket engineered to use water as fuel (HHO), featuring an integrated mini-computer for telemetry and control.",
+    "tags": "Hardware, Science"
+  },
+  {
+    "id": 2,
+    "title": "High-Performance Web Solutions",
+    "description": "Fast, SEO-optimized static websites hosted via GitHub with minimal server-side execution. Designed for local businesses.",
+    "tags": "Web Dev, SEO"
+  },
+  {
+    "id": 3,
+    "title": "Network Recon Lab",
+    "description": "Custom penetration testing environments utilizing Kali Linux, focusing on Nmap scripting and vulnerability scanning.",
+    "tags": "Cybersecurity, Kali Linux"
+  },
+  { 
+    "id": 4,
+    "title": "AI/ML python program",
+    "description": "An old school ai/ml program from way back in 2023 focusing on voice control wikipedia research and desktop assistant.",
+    "tags":"Cybersecurity, Kali Linux, AI"
+  }
+]
