@@ -1,0 +1,8 @@
+----------------------------------------------------------------
+TABLE OF CONTENTS :]
+1. INDEX.PHP
+2. API.PHP
+3. DOCKERFILE
+4. PROJECTS.JSON
+5. LICENSE.TXT
+6. README.TXT

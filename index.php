@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> OM | Portfolio</title>
-    <!-- Vue 3 CDN -->
+    <title>Ashu | Portfolio</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
         :root {
@@ -15,6 +14,7 @@
             --accent-purple: #7000ff;
             --text-main: #f0f0f5;
             --text-muted: #a0a0b8;
+            --danger: #ff6b6b;
         }
 
         * {
@@ -22,6 +22,10 @@
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -32,7 +36,6 @@
             position: relative;
         }
 
-        /* Fixed Background Canvas for Stars, Shapes & Lines */
         #bg-canvas {
             position: fixed;
             top: 0;
@@ -43,16 +46,14 @@
             pointer-events: none;
         }
 
-        /* Layout Container */
         .container {
             position: relative;
             z-index: 1;
             max-width: 1100px;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 2rem 1.5rem 5rem;
         }
 
-        /* Navbar */
         nav {
             display: flex;
             justify-content: space-between;
@@ -60,6 +61,7 @@
             padding: 1.5rem 0;
             border-bottom: 1px solid var(--card-border);
             backdrop-filter: blur(8px);
+            gap: 1rem;
         }
 
         .logo {
@@ -71,10 +73,15 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.4rem;
+        }
+
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
-            margin-left: 2rem;
             font-size: 0.95rem;
             transition: color 0.2s ease;
         }
@@ -83,12 +90,30 @@
             color: var(--accent-cyan);
         }
 
-        /* Typography */
-        h1 { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
-        h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 2rem; color: #fff; display: flex; align-items: center; gap: 10px; }
-        h2::after { content: ''; flex: 1; height: 1px; background: var(--card-border); }
+        h1 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
 
-        /* Sections */
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--card-border);
+        }
+
         section {
             padding: 4rem 0;
         }
@@ -100,10 +125,9 @@
             line-height: 1.6;
         }
 
-        /* Projects Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.8rem;
         }
 
@@ -163,7 +187,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Admin Panel Form */
         .admin-box {
             background: rgba(18, 18, 26, 0.95);
             border: 1px solid var(--accent-cyan);
@@ -205,6 +228,17 @@
             transform: scale(1.02);
         }
 
+        .secondary-btn {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+        }
+
+        .danger-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ff8a5b);
+            color: #fff;
+        }
+
         .admin-btn {
             position: fixed;
             bottom: 25px;
@@ -223,17 +257,36 @@
             border-color: var(--accent-cyan);
             color: #fff;
         }
+
+        .inline-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                gap: 0.8rem 1.2rem;
+            }
+
+            .admin-box {
+                padding: 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <!-- Background Canvas for Moving Stars, Geometric Shapes & Lines -->
     <canvas id="bg-canvas"></canvas>
 
     <div id="app" class="container">
-        
         <nav>
-            <div class="logo">OM</div>
+            <div class="logo">ASHU</div>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#projects">Projects</a>
@@ -241,7 +294,6 @@
             </div>
         </nav>
 
-        <!-- HERO / ABOUT SECTION -->
         <section id="about">
             <div style="color: var(--accent-cyan); font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">01. ABOUT ME</div>
             <h1>15yo Developer & Hardware Enthusiast.</h1>
@@ -250,10 +302,9 @@
             </p>
         </section>
 
-        <!-- PROJECTS SECTION -->
         <section id="projects">
             <h2>Featured Systems</h2>
-            
+
             <div v-if="loading" style="color: var(--text-muted);">Fetching systems...</div>
 
             <div v-else class="projects-grid">
@@ -269,24 +320,44 @@
                             {{ tag }}
                         </span>
                     </div>
+
+                    <div v-if="adminAuthenticated" class="inline-actions">
+                        <button type="button" @click="startEdit(project)">Edit</button>
+                        <button type="button" class="danger-btn" @click="deleteProject(project)">Delete</button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- REAL-TIME ADMIN PANEL -->
         <section v-if="adminMode" class="admin-box">
-            <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-cyan);">⚙️ System Admin: Push Project</h2>
-            <form @submit.prevent="submitProject">
-                <input v-model="newProject.title" type="text" placeholder="Project Title" required>
-                <textarea v-model="newProject.description" placeholder="Project Description..." rows="3" required></textarea>
-                <input v-model="newProject.tags" type="text" placeholder="Tags (comma separated, e.g., Hardware, Python, Web)">
-                <button type="submit" :disabled="isSubmitting">
-                    {{ isSubmitting ? 'Syncing with Server...' : 'Deploy Project' }}
-                </button>
-            </form>
+            <div v-if="!adminAuthenticated">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-cyan);">🔒 Admin Login</h2>
+                <input v-model="loginPassword" type="password" placeholder="Enter admin password" @keyup.enter="loginAdmin">
+                <p v-if="loginError" style="color:#ff8a5b; margin-bottom: 1rem;">{{ loginError }}</p>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">Default password: admin2026</p>
+                <button type="button" @click="loginAdmin">Unlock Admin Panel</button>
+            </div>
+
+            <div v-else>
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+                    <h2 style="font-size:1.5rem; margin:0; color: var(--accent-cyan);">⚙️ Project Manager</h2>
+                    <button type="button" class="danger-btn" @click="logoutAdmin" style="padding:0.6rem 1rem;">Logout</button>
+                </div>
+
+                <form @submit.prevent="submitProject">
+                    <input v-model="newProject.title" type="text" :placeholder="formMode === 'edit' ? 'Edit project title' : 'Project Title'" required>
+                    <textarea v-model="newProject.description" :placeholder="formMode === 'edit' ? 'Edit project description...' : 'Project Description...'" rows="3" required></textarea>
+                    <input v-model="newProject.tags" type="text" :placeholder="formMode === 'edit' ? 'Edit tags...' : 'Tags (comma separated, e.g., Hardware, Python, Web)'">
+                    <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                        <button type="submit" :disabled="isSubmitting">
+                            {{ isSubmitting ? (formMode === 'edit' ? 'Updating...' : 'Publishing...') : (formMode === 'edit' ? 'Update Project' : 'Deploy Project') }}
+                        </button>
+                        <button type="button" class="secondary-btn" @click="resetForm">Cancel</button>
+                    </div>
+                </form>
+            </div>
         </section>
 
-        <!-- CONTACT SECTION -->
         <section id="contact">
             <h2>Contact</h2>
             <div class="project-card" style="max-width: 500px;">
@@ -295,13 +366,11 @@
             </div>
         </section>
 
-        <button class="admin-btn" @click="adminMode = !adminMode">
-            {{ adminMode ? 'Close Admin' : '⚙️ Admin Console' }}
+        <button class="admin-btn" @click="toggleAdmin">
+            {{ adminAuthenticated ? (adminMode ? 'Close Admin' : '⚙️ Admin Console') : '🔒 Admin Login' }}
         </button>
-
     </div>
 
-    <!-- Interactive Background Stars & Geometrics Script -->
     <script>
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
@@ -323,7 +392,6 @@
         window.addEventListener('resize', resize);
         resize();
 
-        // Star Particles
         class Star {
             constructor() {
                 this.x = Math.random() * width;
@@ -351,13 +419,12 @@
             }
         }
 
-        // Floating Geometric Shapes
         class Shape {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
                 this.size = Math.random() * 30 + 15;
-                this.sides = Math.floor(Math.random() * 3) + 3; // Triangles, Squares, Pentagons
+                this.sides = Math.floor(Math.random() * 3) + 3;
                 this.angle = Math.random() * Math.PI * 2;
                 this.rotSpeed = (Math.random() - 0.5) * 0.01;
                 this.vx = (Math.random() - 0.5) * 0.3;
@@ -391,22 +458,17 @@
             }
         }
 
-        // Initialize Background Objects
         for (let i = 0; i < 90; i++) stars.push(new Star());
         for (let i = 0; i < 12; i++) shapes.push(new Shape());
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
-
-            // Draw & Update Shapes
             shapes.forEach(s => { s.update(); s.draw(); });
 
-            // Draw & Connect Stars
             for (let i = 0; i < stars.length; i++) {
                 stars[i].update();
                 stars[i].draw();
 
-                // Draw connecting lines between close stars
                 for (let j = i + 1; j < stars.length; j++) {
                     let dx = stars[i].x - stars[j].x;
                     let dy = stars[i].y - stars[j].y;
@@ -422,7 +484,6 @@
                     }
                 }
 
-                // Connect to mouse cursor
                 if (mouse.x && mouse.y) {
                     let mdx = stars[i].x - mouse.x;
                     let mdy = stars[i].y - mouse.y;
@@ -443,7 +504,6 @@
         animate();
     </script>
 
-    <!-- Vue App Script -->
     <script>
         const { createApp } = Vue;
 
@@ -454,46 +514,194 @@
                     adminMode: false,
                     loading: true,
                     isSubmitting: false,
+                    adminAuthenticated: false,
+                    loginPassword: '',
+                    loginError: '',
+                    formMode: 'add',
+                    editingProjectId: null,
                     newProject: { title: '', description: '', tags: '' }
-                }
+                };
             },
             mounted() {
                 this.fetchProjects();
+                this.checkAdminSession();
             },
             methods: {
                 formatTags(tagString) {
                     if (!tagString) return [];
-                    return tagString.split(',').map(t => t.trim());
+                    if (Array.isArray(tagString)) {
+                        return tagString.map((t) => String(t).trim()).filter(Boolean);
+                    }
+                    return String(tagString).split(',').map((t) => t.trim()).filter(Boolean);
+                },
+                async checkAdminSession() {
+                    try {
+                        const response = await fetch('api.php?auth=1');
+                        const data = await response.json();
+                        this.adminAuthenticated = Boolean(data.authenticated);
+                    } catch (error) {
+                        this.adminAuthenticated = false;
+                    }
+                },
+                toggleAdmin() {
+                    if (!this.adminAuthenticated) {
+                        this.adminMode = !this.adminMode;
+                        this.loginError = '';
+                        return;
+                    }
+
+                    this.adminMode = !this.adminMode;
+                    if (!this.adminMode) {
+                        this.resetForm();
+                    }
+                },
+                resetForm() {
+                    this.formMode = 'add';
+                    this.editingProjectId = null;
+                    this.newProject = { title: '', description: '', tags: '' };
+                    this.loginError = '';
+                },
+                async loginAdmin() {
+                    if (!this.loginPassword.trim()) {
+                        this.loginError = 'Please enter the admin password.';
+                        return;
+                    }
+
+                    try {
+                        const passwordHash = await this.sha256(this.loginPassword.trim());
+                        const response = await fetch('api.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ action: 'login', password: passwordHash })
+                        });
+
+                        const result = await response.json();
+                        if (response.ok && result.status === 'success') {
+                            this.adminAuthenticated = true;
+                            this.adminMode = true;
+                            this.loginPassword = '';
+                            this.loginError = '';
+                            this.resetForm();
+                            return;
+                        }
+
+                        this.loginError = result.message || 'Invalid password.';
+                    } catch (error) {
+                        this.loginError = 'Unable to authenticate admin.';
+                    }
+                },
+                async logoutAdmin() {
+                    try {
+                        await fetch('api.php', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ action: 'logout' })
+                        });
+                    } catch (error) {
+                        console.warn('Logout request failed:', error);
+                    }
+
+                    this.adminAuthenticated = false;
+                    this.adminMode = false;
+                    this.loginPassword = '';
+                    this.resetForm();
+                },
+                startEdit(project) {
+                    this.formMode = 'edit';
+                    this.editingProjectId = project.id;
+                    this.newProject = {
+                        title: project.title,
+                        description: project.description,
+                        tags: project.tags || ''
+                    };
+                    this.adminMode = true;
                 },
                 async fetchProjects() {
                     try {
                         const response = await fetch('api.php');
                         const data = await response.json();
-                        this.projects = data;
-                    } catch (err) {
-                        console.error('Failed to load projects:', err);
+                        this.projects = Array.isArray(data) ? data : [];
+                    } catch (error) {
+                        console.error('Failed to load projects:', error);
+                        this.projects = [];
                     } finally {
                         this.loading = false;
                     }
                 },
                 async submitProject() {
+                    if (!this.adminAuthenticated) {
+                        this.adminMode = true;
+                        return;
+                    }
+
                     this.isSubmitting = true;
                     try {
+                        const payload = {
+                            title: this.newProject.title.trim(),
+                            description: this.newProject.description.trim(),
+                            tags: this.newProject.tags.trim()
+                        };
+
+                        const method = this.formMode === 'edit' ? 'PUT' : 'POST';
+                        const requestBody = this.formMode === 'edit'
+                            ? { id: this.editingProjectId, ...payload }
+                            : payload;
+
                         const response = await fetch('api.php', {
-                            method: 'POST',
+                            method,
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(this.newProject)
+                            body: JSON.stringify(requestBody)
                         });
+
                         const result = await response.json();
-                        if (result.status === 'success') {
-                            this.projects.unshift(result.project);
-                            this.newProject = { title: '', description: '', tags: '' };
+                        if (!response.ok || result.status !== 'success') {
+                            throw new Error(result.message || 'Project action failed.');
                         }
-                    } catch (err) {
-                        console.error('Error adding project:', err);
+
+                        if (this.formMode === 'edit') {
+                            this.projects = this.projects.map((project) => {
+                                if (String(project.id) === String(this.editingProjectId)) {
+                                    return { ...project, ...result.project, id: this.editingProjectId };
+                                }
+                                return project;
+                            });
+                        } else {
+                            this.projects.unshift(result.project);
+                        }
+
+                        this.resetForm();
+                        this.adminMode = false;
+                    } catch (error) {
+                        alert(error.message || 'Unable to save project.');
                     } finally {
                         this.isSubmitting = false;
                     }
+                },
+                async deleteProject(project) {
+                    const confirmed = window.confirm(`Delete "${project.title}" from the portfolio?`);
+                    if (!confirmed) return;
+
+                    try {
+                        const response = await fetch('api.php', {
+                            method: 'DELETE',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ id: project.id })
+                        });
+
+                        const result = await response.json();
+                        if (!response.ok || result.status !== 'success') {
+                            throw new Error(result.message || 'Delete failed.');
+                        }
+
+                        this.projects = this.projects.filter((item) => String(item.id) !== String(project.id));
+                    } catch (error) {
+                        alert(error.message || 'Unable to delete project.');
+                    }
+                },
+                async sha256(text) {
+                    const buffer = new TextEncoder().encode(text);
+                    const digest = await crypto.subtle.digest('SHA-256', buffer);
+                    return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, '0')).join('');
                 }
             }
         }).mount('#app');
