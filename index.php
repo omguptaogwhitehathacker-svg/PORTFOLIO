@@ -1,196 +1,450 @@
-<doctype html>
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title> OM | portfolio</title>
-            <!-- Vue.js for reactivity -->
-             <scriptsrc ="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-             <style>
-                :root {
-                    --glass-bg: rgba(255, 255, 255 , 0.1);
-                    --glass-border: rgba(255, 255, 255, 0.2);
-                    --text-main: #ffffff;
-                    --accent: #00ffcc;
-                }
-                * {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashu | Portfolio</title>
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        :root {
+            --bg-black: #050508;
+            --card-bg: rgba(18, 18, 26, 0.75);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --accent-cyan: #00f0ff;
+            --accent-purple: #7000ff;
+            --text-main: #f0f0f5;
+            --text-muted: #a0a0b8;
+        }
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
-        /* Vibrant Animated Background */
         body {
-            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0f0c29);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background-color: var(--bg-black);
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Fixed Background Canvas for Stars, Shapes & Lines */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        /* Responsive Text using clamp() */
-        h1 { font-size: clamp(2.5rem, 5vw, 5rem); margin-bottom: 1rem; }
-        h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 2rem; color: var(--accent); }
-        p { font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.6; }
-
+        /* Layout Container */
         .container {
-            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
         }
 
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(8px);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Typography */
+        h1 { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 2rem; color: #fff; display: flex; align-items: center; gap: 10px; }
+        h2::after { content: ''; flex: 1; height: 1px; background: var(--card-border); }
+
+        /* Sections */
         section {
-            padding: 5rem 0;
-            border-bottom: 1px solid var(--glass-border);
+            padding: 4rem 0;
         }
 
-        /* Glassmorphism Cards */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .hero-desc {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 650px;
+            line-height: 1.6;
         }
 
-        .glass-card:hover {
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 1.8rem;
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
         }
 
-        .tags {
-            color: var(--accent);
-            font-size: 0.9rem;
-            margin-top: 1rem;
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag-badge {
+            background: rgba(0, 240, 255, 0.08);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            font-size: 0.75rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
-        /* Forms & Admin */
+        /* Admin Panel Form */
+        .admin-box {
+            background: rgba(18, 18, 26, 0.95);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.15);
+        }
+
         input, textarea {
             width: 100%;
-            padding: 1rem;
+            padding: 0.9rem;
             margin-bottom: 1rem;
-            background: rgba(0,0,0,0.2);
-            border: 1px solid var(--glass-border);
-            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--card-border);
+            color: #fff;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
         }
 
         button {
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent-cyan), #00a8ff);
             color: #000;
             border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: bold;
+            padding: 0.8rem 1.8rem;
+            font-weight: 700;
             border-radius: 8px;
             cursor: pointer;
-            transition: 0.2s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease;
         }
 
         button:hover {
-            background: #00e6b8;
+            opacity: 0.9;
             transform: scale(1.02);
         }
 
-        .admin-toggle {
+        .admin-btn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            font-size: 0.8rem;
-            padding: 10px;
+            bottom: 25px;
+            right: 25px;
+            background: #12121a;
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            z-index: 100;
         }
 
-        /* Interactive JS Cursor Glow */
-        #cursor-glow {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0,255,204,0.15) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: -1;
+        .admin-btn:hover {
+            border-color: var(--accent-cyan);
+            color: #fff;
         }
-             </style>
-             </head>
+    </style>
+</head>
 <body>
-    <div id="cursor-glow"></div>
+
+    <!-- Background Canvas for Moving Stars, Geometric Shapes & Lines -->
+    <canvas id="bg-canvas"></canvas>
 
     <div id="app" class="container">
         
-        <!-- ABOUT SECTION -->
+        <nav>
+            <div class="logo">ASHU</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+
+        <!-- HERO / ABOUT SECTION -->
         <section id="about">
-            <h1>Hi, I'm om.</h1>
-            <p>I'm a 15-year-old programmer based in Agra. I build high-performance tools, break things to learn how they work, and engineer hardware-software integrations.</p>
+            <div style="color: var(--accent-cyan); font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 1px;">01. ABOUT ME</div>
+            <h1>15yo Developer & Hardware Enthusiast.</h1>
+            <p class="hero-desc">
+                Building high-performance web architecture, exploring cybersecurity lab setups, and pushing custom hardware projects. Fast, minimal execution, zero clutter.
+            </p>
         </section>
 
-        <!-- PROJECTS SECTION (Reactive via Vue & PHP) -->
+        <!-- PROJECTS SECTION -->
         <section id="projects">
-            <h2>Systems & Projects</h2>
+            <h2>Featured Systems</h2>
             
-            <div v-if="loading">Loading projects from server...</div>
+            <div v-if="loading" style="color: var(--text-muted);">Fetching systems...</div>
 
-            <div v-else class="project-grid">
-                <div class="glass-card" v-for="project in projects" :key="project.id">
-                    <h3>{{ project.title }}</h3>
-                    <p style="margin-top: 10px;">{{ project.description }}</p>
-                    <div class="tags">{{ project.tags }}</div>
+            <div v-else class="projects-grid">
+                <div class="project-card" v-for="project in projects" :key="project.id">
+                    <div>
+                        <div class="project-header">
+                            <div class="project-title">{{ project.title }}</div>
+                        </div>
+                        <p class="project-desc">{{ project.description }}</p>
+                    </div>
+                    <div class="tag-list">
+                        <span class="tag-badge" v-for="tag in formatTags(project.tags)" :key="tag">
+                            {{ tag }}
+                        </span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ADMIN PANEL -->
-        <section id="admin" v-if="adminMode" class="glass-card" style="border-color: var(--accent);">
-            <h2 style="font-size: 2rem;">⚡ Admin: Deploy New Project</h2>
+        <!-- REAL-TIME ADMIN PANEL -->
+        <section v-if="adminMode" class="admin-box">
+            <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-cyan);">⚙️ System Admin: Push Project</h2>
             <form @submit.prevent="submitProject">
-                <input v-model="newProject.title" type="text" placeholder="Project Name" required>
-                <textarea v-model="newProject.description" placeholder="Technical details..." rows="3" required></textarea>
-                <input v-model="newProject.tags" type="text" placeholder="Tags (e.g., Vue.js, PHP, Hardware)">
+                <input v-model="newProject.title" type="text" placeholder="Project Title" required>
+                <textarea v-model="newProject.description" placeholder="Project Description..." rows="3" required></textarea>
+                <input v-model="newProject.tags" type="text" placeholder="Tags (comma separated, e.g., Hardware, Python, Web)">
                 <button type="submit" :disabled="isSubmitting">
-                    {{ isSubmitting ? 'Pushing to Server...' : 'Ship It' }}
+                    {{ isSubmitting ? 'Syncing with Server...' : 'Deploy Project' }}
                 </button>
             </form>
         </section>
 
         <!-- CONTACT SECTION -->
         <section id="contact">
-            <h2>Initialize Contact</h2>
-            <div class="glass-card">
-                <p>Looking for a high-performance web build or want to collaborate on a hardware project?</p>
-                <p style="margin-top:1rem;">Email for business inquiries only.</p>
+            <h2>Contact</h2>
+            <div class="project-card" style="max-width: 500px;">
+                <p class="project-desc">Open for web design pitches, custom software builds, or tech collaborations.</p>
+                <p style="color: var(--accent-cyan); font-weight: 600; margin-top: 1rem;">Business Email Available Upon Request</p>
             </div>
         </section>
 
-        <button class="admin-toggle" @click="adminMode = !adminMode">
-            ⚙️ Toggle Admin Panel
+        <button class="admin-btn" @click="adminMode = !adminMode">
+            {{ adminMode ? 'Close Admin' : '⚙️ Admin Console' }}
         </button>
+
     </div>
 
+    <!-- Interactive Background Stars & Geometrics Script -->
     <script>
-        // Interactive Cursor Glow
-        document.addEventListener('mousemove', (e) => {
-            const glow = document.getElementById('cursor-glow');
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let stars = [];
+        let shapes = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
         });
 
-        // Vue.js Application
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Star Particles
+        class Star {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 1.8 + 0.5;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Floating Geometric Shapes
+        class Shape {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 30 + 15;
+                this.sides = Math.floor(Math.random() * 3) + 3; // Triangles, Squares, Pentagons
+                this.angle = Math.random() * Math.PI * 2;
+                this.rotSpeed = (Math.random() - 0.5) * 0.01;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.angle += this.rotSpeed;
+
+                if (this.x < -50) this.x = width + 50;
+                if (this.x > width + 50) this.x = -50;
+                if (this.y < -50) this.y = height + 50;
+                if (this.y > height + 50) this.y = -50;
+            }
+
+            draw() {
+                ctx.strokeStyle = 'rgba(0, 240, 255, 0.15)';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                for (let i = 0; i < this.sides; i++) {
+                    let a = this.angle + (i * 2 * Math.PI / this.sides);
+                    let sx = this.x + this.size * Math.cos(a);
+                    let sy = this.y + this.size * Math.sin(a);
+                    if (i === 0) ctx.moveTo(sx, sy);
+                    else ctx.lineTo(sx, sy);
+                }
+                ctx.closePath();
+                ctx.stroke();
+            }
+        }
+
+        // Initialize Background Objects
+        for (let i = 0; i < 90; i++) stars.push(new Star());
+        for (let i = 0; i < 12; i++) shapes.push(new Shape());
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Draw & Update Shapes
+            shapes.forEach(s => { s.update(); s.draw(); });
+
+            // Draw & Connect Stars
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].update();
+                stars[i].draw();
+
+                // Draw connecting lines between close stars
+                for (let j = i + 1; j < stars.length; j++) {
+                    let dx = stars[i].x - stars[j].x;
+                    let dy = stars[i].y - stars[j].y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 110) {
+                        ctx.strokeStyle = `rgba(112, 0, 255, ${0.25 - dist / 440})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(stars[i].x, stars[i].y);
+                        ctx.lineTo(stars[j].x, stars[j].y);
+                        ctx.stroke();
+                    }
+                }
+
+                // Connect to mouse cursor
+                if (mouse.x && mouse.y) {
+                    let mdx = stars[i].x - mouse.x;
+                    let mdy = stars[i].y - mouse.y;
+                    let mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+                    if (mdist < mouse.radius) {
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.4 - mdist / (mouse.radius * 2.5)})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(stars[i].x, stars[i].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+    <!-- Vue App Script -->
+    <script>
         const { createApp } = Vue;
 
         createApp({
@@ -200,53 +454,46 @@
                     adminMode: false,
                     loading: true,
                     isSubmitting: false,
-                    newProject: {
-                        title: '',
-                        description: '',
-                        tags: ''
-                    }
+                    newProject: { title: '', description: '', tags: '' }
                 }
             },
             mounted() {
                 this.fetchProjects();
             },
             methods: {
-                // GET request to PHP API
+                formatTags(tagString) {
+                    if (!tagString) return [];
+                    return tagString.split(',').map(t => t.trim());
+                },
                 async fetchProjects() {
                     try {
                         const response = await fetch('api.php');
                         const data = await response.json();
                         this.projects = data;
-                        this.loading = false;
-                    } catch (error) {
-                        console.error("Error fetching projects:", error);
+                    } catch (err) {
+                        console.error('Failed to load projects:', err);
+                    } finally {
                         this.loading = false;
                     }
                 },
-                // POST request to PHP API
                 async submitProject() {
                     this.isSubmitting = true;
                     try {
                         const response = await fetch('api.php', {
                             method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
+                            headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(this.newProject)
                         });
-                        
                         const result = await response.json();
-                        
                         if (result.status === 'success') {
-                            // Reactively update the UI instantly
                             this.projects.unshift(result.project);
-                            // Clear the form
                             this.newProject = { title: '', description: '', tags: '' };
                         }
-                    } catch (error) {
-                        console.error("Error saving project:", error);
+                    } catch (err) {
+                        console.error('Error adding project:', err);
+                    } finally {
+                        this.isSubmitting = false;
                     }
-                    this.isSubmitting = false;
                 }
             }
         }).mount('#app');
