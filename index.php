@@ -233,7 +233,7 @@
     <div id="app" class="container">
         
         <nav>
-            <div class="logo">ASHU</div>
+            <div class="logo">OM</div>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#projects">Projects</a>
