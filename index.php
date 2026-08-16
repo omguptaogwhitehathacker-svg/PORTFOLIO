@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashu | Portfolio</title>
+    <title>Om | Portfolio</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <style>
         :root {
@@ -286,7 +286,7 @@
 
     <div id="app" class="container">
         <nav>
-            <div class="logo">ASHU</div>
+            <div class="logo">OM</div>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#projects">Projects</a>
