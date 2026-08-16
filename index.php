@@ -568,11 +568,10 @@
                     }
 
                     try {
-                        const passwordHash = await this.sha256(this.loginPassword.trim());
                         const response = await fetch('api.php', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ action: 'login', password: passwordHash })
+                            body: JSON.stringify({ action: 'login', password: this.loginPassword.trim() })
                         });
 
                         const result = await response.json();
