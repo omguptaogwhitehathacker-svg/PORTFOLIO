@@ -11,6 +11,8 @@ const DATA_FILE = path.join(ROOT_DIR, 'projects.json');
 const ADMIN_PASSWORD = 'admin2026';
 const ADMIN_HASH = crypto.createHash('sha256').update(ADMIN_PASSWORD).digest('hex');
 
+app.set('trust proxy', 1);
+
 function ensureDataFile() {
   if (!fs.existsSync(DATA_FILE)) {
     fs.writeFileSync(DATA_FILE, '[]', 'utf8');
@@ -46,7 +48,11 @@ app.use(
     secret: process.env.SESSION_SECRET || 'portfolio-admin-secret',
     resave: false,
     saveUninitialized: false,
-    cookie: { httpOnly: true, sameSite: 'lax' }
+    cookie: {
+      httpOnly: true,
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production'
+    }
   })
 );
 
@@ -60,7 +66,11 @@ app.get('/index.php', (req, res) => {
   res.sendFile(path.join(ROOT_DIR, 'index.php'));
 });
 
-app.all('/api.php', (req, res) => {
+app.get('/index.html', (req, res) => {
+  res.sendFile(path.join(ROOT_DIR, 'index.php'));
+});
+
+app.all(['/api', '/api.php'], (req, res) => {
   const { method } = req;
 
   if (method === 'GET') {
@@ -187,6 +197,10 @@ app.use((req, res) => {
   res.status(404).json({ status: 'error', message: 'Not found' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Portfolio running at http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Portfolio running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
