@@ -362,7 +362,7 @@
             <h2>Contact</h2>
             <div class="project-card" style="max-width: 500px;">
                 <p class="project-desc">Open for web design pitches, custom software builds, or tech collaborations.</p>
-                <p style="color: var(--accent-cyan); font-weight: 600; margin-top: 1rem;">Business Email Available Upon Request</p>
+                <p style="color: var(--accent-cyan); font-weight: 600; margin-top: 1rem;"><a href="mailto:omguptaogwhitehathacker@gmail.com" style="color: var(--accent-cyan); text-decoration: none; transition: opacity 0.2s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">omguptaogwhitehathacker@gmail.com</a></p>
             </div>
         </section>
 
