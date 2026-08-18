@@ -2,41 +2,32 @@ OM GUPTA // PORTFOLIO PROJECT
 
 ABOUT THIS PROJECT
 ------------------
-This project is a personal portfolio website blended with a futuristic experience.
+This project is a personal portfolio website blended with a aesthatically pleasing, soft colored experience.
 It combines a premium front-end vibe, admin-controlled project management.
-Built for portfolio presentation, creative branding, and immersive web UI experimentation.
+
+Built for portfolio presentation, creative branding.
 
 
 CORE FEATURES
 -------------
-- Portfolio landing page with about, projects, and contact-style sections
-- Dynamic project list driven by JSON data
+- Portfolio landing page with about, projects, and contact webpages
 - Admin panel for adding, editing, and deleting project entries
-- SHA-256 based password protection for admin access
-- Docker-ready static deployment for quick setup
 
-
-PROJECT STRUCTURE
------------------
-/root
-  index.php               - Main portfolio page and UI shell
-  api.php                 - Project CRUD API and admin authentication logic
-  projects.json           - Stored project data
-  readme.txt              - Project documentation
-  license.txt             - License information
 
 HOW TO RUN
 ----------
 Option 1: Open directly in browser
-- Open index.php in a PHP-enabled local server
-- Example:
-  php -S localhost:8000
-  Then visit http://localhost:8000
+- Open index.html in a PHP-enabled local server, ensure all files are present.
+
+option2:
+- Go to website link "https://omguptaogwhitehathacker-svg.github.io/PORTFOLIO/index.html'
+
 
 ADMIN ACCESS
 ------------
-The admin panel is protected using SHA-256 hashing.
-Use the configured admin credential logic defined in api.php.
+- the admin panel can be used for managing projects as mentioned
+- The default credentials for the admin panel-login are (om/om123)
+
 
 IMPORTANT:
 - Please read license.txt for the official legal terms.
@@ -48,14 +39,12 @@ CREDITS
 --------
 Built by: OM GUPTA
 Project identity: D3RLORD3 / omguptaogwhitehathacker
-Concept direction: cyber aesthetic, minimal premium UI
-
-"D3RLORD3 is not a name. It is a signal. A code for control, precision, and vision."
+Concept direction: aesthetic, minimal premium UI, white FANATASY looks
 
 
 LICENSE
 --------
-This project is shared under the terms described in license.txt.
+This project is shared under the terms described in \license.txt.
 Please refer to that file for the full copyright and redistribution details.
 
 
@@ -64,9 +53,11 @@ FINAL NOTE
 This project was created with passion, experimentation, and a desire to push the boundaries
 of personal branding through a visual aesthatic digital experience.
 It is open for learning, customization, and creative reuse, with credit where it is due.
+I hope you have as much fun using it as much I had in making it.
 
-"Built to feel like a machine. Crafted to feel like a statement."
+
+All files available at "https://github.com/omguptaogwhitehathacker-svg/PORTFOLIO"
 
 ----------------------------------------------
-OM GUPTA // DIGITAL DOMAIN // PORTFOLIO
+OM GUPTA // PORTFOLIO
 ----------------------------------------------
