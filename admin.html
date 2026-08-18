@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Om | Admin Panel</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Additional styles for login overlay */
+    .login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .login-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+    }
+
+    .login-box .form-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .login-box label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .login-box input:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 0 3px rgba(74,144,226,0.1);
+    }
+
+    .login-box .btn {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .error-msg {
+      color: #e74c3c;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      min-height: 1.2em;
+    }
+
+    .logout-btn {
+      background: none;
+      border: none;
+      color: #e74c3c;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: #fee;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Overlay -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+      <h2>🔐 Admin Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <div class="error-msg" id="loginError"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Parallax Background -->
+  <div class="parallax-bg" id="parallaxBg"></div>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Om<span>.</span></a>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="nav-link" title="About Me">About</a></li>
+        <li><a href="projects.html" class="nav-link" title="My Projects">Projects</a></li>
+        <li><a href="contact.html" class="nav-link" title="Get in Touch">Contact</a></li>
+        <li><a href="admin.html" class="nav-link active admin-link" title="Admin Panel">⚙</a></li>
+        <li><button class="logout-btn" id="logoutBtn" title="Logout" style="display:none;">Logout</button></li>
+      </ul>
+      <div class="hamburger" id="hamburger">☰</div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="page-content admin-page">
+    <h1 class="page-title">Admin Panel</h1>
+    <div class="admin-container">
+      <div class="admin-form-card">
+        <h2 id="formTitle">Add New Project</h2>
+        <form id="projectForm">
+          <input type="hidden" id="projectId">
+          <div class="form-group">
+            <label for="title">Project Title *</label>
+            <input type="text" id="title" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description *</label>
+            <textarea id="description" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="emoji">Emoji Icon (e.g., 🚀)</label>
+            <input type="text" id="emoji" placeholder="🚀">
+          </div>
+          <div class="form-group">
+            <label for="imageUrl">Image URL (optional)</label>
+            <input type="url" id="imageUrl" placeholder="https://...">
+          </div>
+          <button type="submit" class="btn" id="submitBtn">Add Project</button>
+          <button type="button" class="btn btn-secondary" id="cancelEditBtn" style="display:none;">Cancel Edit</button>
+        </form>
+      </div>
+      <div class="admin-project-list">
+        <h2>Existing Projects</h2>
+        <div id="adminProjectList" class="admin-list">
+          <!-- Projects will be listed here -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Om Gupta. All rights reserved.</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
