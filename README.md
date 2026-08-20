@@ -1,63 +1,32 @@
-OM GUPTA // PORTFOLIO PROJECT
+# Om's Portfolio Website
 
-ABOUT THIS PROJECT
-------------------
-This project is a personal portfolio website blended with a aesthatically pleasing, soft colored experience.
-It combines a premium front-end vibe, admin-controlled project management.
+Hey! This is my personal portfolio. I built it to show off my projects (HHO stuff, solar things, etc.) and maybe get some cool collabs.
 
-Built for portfolio presentation, creative branding.
+## What's inside
 
+- **About page** – who I am and what I like.
+- **Projects page** – all my projects with emojis and descriptions.
+- **Contact page** – my email and socials.
+- **Admin panel** – a hidden page where I can add, edit, or delete projects. It has a login (username: `om`, password: `om123`). Keep it secret 😉.
 
-CORE FEATURES
--------------
-- Portfolio landing page with about, projects, and contact webpages
-- Admin panel for adding, editing, and deleting project entries
+## How to run
 
+Just open `index.html` in any browser. No server needed, it's all static HTML, CSS, and JavaScript. Projects are saved in `localStorage`, so they stay even after refresh.
 
-HOW TO RUN
-----------
-Option 1: Open directly in browser
-- Open index.html in a PHP-enabled local server, ensure all files are present.
+## The techy stuff
 
-option2:
-- Go to website link "https://omguptaogwhitehathacker-svg.github.io/PORTFOLIO/index.html'
+- Plain HTML, CSS, and vanilla JavaScript. No frameworks because I wanted to keep it simple.
+- The background has a parallax effect – it moves slower than the page when you scroll. I did that by listening to the scroll event and changing the `transform` property.
+- The admin panel uses `localStorage` to store projects. So if I add a new project, it's saved on my computer (or wherever the site is hosted). It's not a real database, but fine for now.
+- Login uses `sessionStorage` so it only stays logged in for that tab.
 
+## Why I made it
 
-ADMIN ACCESS
-------------
-- the admin panel can be used for managing projects as mentioned
-- The default credentials for the admin panel-login are (om/om123)
+I like building things, both software and hardware. This website is kind of a mix of both – it's a coding project that shows off my hardware projects. I wanted it to look industrial because my projects are mostly mechanical/scientific. Orange is my favorite color, and it fits the "metal and sparks" vibe.
 
+## Known issues / future ideas
 
-IMPORTANT:
-- Please read license.txt for the official legal terms.
-- This project is created for creative and portfolio use.
-- Credit is appreciated and recommended.
+- The login is not secure at all – anyone can read the source code and find the password. For a real site I'd need a backend.
+- I want to add a real database later maybe "firebase" id also love to add an section for iimages of my project.
 
-
-CREDITS
---------
-Built by: OM GUPTA
-Project identity: D3RLORD3 / omguptaogwhitehathacker
-Concept direction: aesthetic, minimal premium UI, white FANATASY looks
-
-
-LICENSE
---------
-This project is shared under the terms described in \license.txt.
-Please refer to that file for the full copyright and redistribution details.
-
-
-FINAL NOTE
-----------
-This project was created with passion, experimentation, and a desire to push the boundaries
-of personal branding through a visual aesthatic digital experience.
-It is open for learning, customization, and creative reuse, with credit where it is due.
-I hope you have as much fun using it as much I had in making it.
-
-
-All files available at "https://github.com/omguptaogwhitehathacker-svg/PORTFOLIO"
-
-----------------------------------------------
-OM GUPTA // PORTFOLIO
-----------------------------------------------
+That's it. Thanks for checking it out!
