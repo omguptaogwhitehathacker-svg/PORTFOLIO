@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Industrial Login Overlay */
+    /* login overlay stuff, i added this here because it's only for admin page */
     .login-overlay {
       position: fixed;
       top: 0;
@@ -106,7 +106,7 @@
   </style>
 </head>
 <body>
-  <!-- Login Overlay -->
+  <!-- login overlay, hidden until login succeeds -->
   <div class="login-overlay" id="loginOverlay">
     <div class="login-box">
       <h2>🔐 Admin Login</h2>
@@ -125,11 +125,9 @@
     </div>
   </div>
 
-  <!-- Parallax Background -->
   <div class="parallax-bg" id="parallaxBg"></div>
   <div class="progress-bar" id="progressBar"></div>
 
-  <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="index.html" class="logo">Om<span>.</span></a>
@@ -144,7 +142,6 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
   <main class="page-content admin-page">
     <h1 class="page-title">Admin Panel</h1>
     <div class="admin-container">
@@ -175,7 +172,7 @@
       <div class="admin-project-list">
         <h2>Existing Projects</h2>
         <div id="adminProjectList" class="admin-list">
-          <!-- Projects will be listed here -->
+          <!-- project list will be here -->
         </div>
       </div>
     </div>

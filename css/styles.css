@@ -1,6 +1,7 @@
 /* ==========================================
    INDUSTRIAL PORTFOLIO THEME
-   Inspired by Templatemo Axis 619
+   I based it on the Templatemo Axis template
+   because I like the metal/engineering look.
    ========================================== */
 
 * {
@@ -10,7 +11,7 @@
 }
 
 :root {
-  --primary: #f39c12;          /* Amber/Orange accent */
+  --primary: #f39c12;          /* orange like sparks */
   --primary-dark: #e67e22;
   --bg-dark: #1e1e1e;
   --bg-darker: #141414;
@@ -30,7 +31,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------- PARALLAX BACKGROUND (Industrial gradient) ---------- */
+/* ---------- background, no clouds, just industrial gradient ---------- */
 .parallax-bg {
   position: fixed;
   top: 0;
@@ -45,7 +46,7 @@ body {
   transform: translateZ(0);
 }
 
-/* ---------- SCROLL PROGRESS BAR ---------- */
+/* scroll progress bar */
 .progress-bar {
   position: fixed;
   top: 0;
@@ -57,7 +58,7 @@ body {
   transition: width 0.1s linear;
 }
 
-/* ---------- NAVIGATION ---------- */
+/* navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -141,7 +142,7 @@ body {
   user-select: none;
 }
 
-/* ---------- HERO SECTION ---------- */
+/* hero */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -176,6 +177,7 @@ body {
   animation: fadeInUp 0.8s ease 0.2s both;
 }
 
+/* buttons */
 .btn {
   display: inline-block;
   padding: 0.8rem 2rem;
@@ -211,7 +213,7 @@ body {
   color: #6c757d;
 }
 
-/* ---------- SECTIONS ---------- */
+/* sections */
 .section {
   padding: 5rem 2rem;
   background: rgba(20, 20, 20, 0.9);
@@ -247,7 +249,7 @@ body {
   border-radius: 0;
 }
 
-/* About Grid */
+/* about grid */
 .about-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -297,7 +299,7 @@ body {
   font-size: 0.9rem;
 }
 
-/* Interests Grid */
+/* interests */
 .interests-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -324,7 +326,7 @@ body {
   transform: scale(1.03);
 }
 
-/* ---------- PAGE CONTENT (Projects, Contact, Admin) ---------- */
+/* page content */
 .page-content {
   min-height: 100vh;
   padding-top: 100px;
@@ -341,7 +343,7 @@ body {
   letter-spacing: 4px;
 }
 
-/* Projects Grid */
+/* projects grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -393,7 +395,7 @@ body {
   font-size: 0.95rem;
 }
 
-/* Contact Page */
+/* contact */
 .contact-page {
   display: flex;
   flex-direction: column;
@@ -439,7 +441,7 @@ body {
   filter: grayscale(0);
 }
 
-/* Admin Panel */
+/* admin */
 .admin-page {
   padding-bottom: 4rem;
 }
@@ -543,7 +545,7 @@ body {
   transform: scale(1.1);
 }
 
-/* ---------- FOOTER ---------- */
+/* footer */
 footer {
   background: #141414;
   text-align: center;
@@ -553,7 +555,7 @@ footer {
   border-top: 2px solid var(--primary);
 }
 
-/* ---------- ANIMATIONS ---------- */
+/* animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -572,7 +574,7 @@ footer {
 .delay-1 { animation-delay: 0.2s; }
 .delay-2 { animation-delay: 0.4s; }
 
-/* ---------- RESPONSIVE ---------- */
+/* responsive */
 @media (max-width: 768px) {
   .hamburger {
     display: block;
